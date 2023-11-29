@@ -1,10 +1,9 @@
 #pragma once
-
 #include "sha1.h"
 #include "string.h"
 
-
 #define LOGINLENGTH 10
+
 
 class HashTable { // хеш-таблица
 public:

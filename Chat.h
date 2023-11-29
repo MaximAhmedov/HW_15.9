@@ -2,8 +2,8 @@
 #include <iostream>
 #include "HashTable.h"
 
-
 #define LOGINLENGTH 10
+
 
 class Chat : public HashTable{
 public:
