@@ -31,6 +31,24 @@ void HashTable::add(char _login[LOGINLENGTH], uint* sh1)
     }
 }
 
+void HashTable::del(char _login[LOGINLENGTH], uint* sh1)
+{
+    int index = -1, i = 0;
+    for (; i < mem_size; i++) {
+        index = hash_func(_login, i);
+        if (array[index].status == enPairStatus::engaged) {
+            break;
+        }
+    }
+    if (i >= mem_size) {
+        return;
+    }
+    else {
+        array[index].status = deleted;
+        count--;
+    }
+}
+
 void HashTable::resize()
 {
     Pair* save = array;

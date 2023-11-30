@@ -8,6 +8,12 @@ void Chat::reg(char _login[LOGINLENGTH], char _pass[], int pass_length) {
     table.add(_login, sh1);
 }
 
+void Chat::logout(char _login[LOGINLENGTH], char _pass[], int pass_length)
+{
+    uint* sh1 = sha1(_pass, pass_length);
+    table.del(_login, sh1);
+}
+
 bool Chat::login(char _login[LOGINLENGTH], char _pass[], int pass_length) {
     int i = 0;
     for (; i < table.mem_size; i++) {
@@ -18,10 +24,10 @@ bool Chat::login(char _login[LOGINLENGTH], char _pass[], int pass_length) {
     }
     if (i >= table.mem_size) return false;
     uint* digest = sha1(_pass, pass_length);
-    bool cmpHashes = !memcmp(
+    bool cmpHashes = (table.array[i].status == enPairStatus::engaged &&  !memcmp(
         table.array[i].pass_sha1_hash,
         digest,
-        SHA1HASHLENGTHBYTES);
+        SHA1HASHLENGTHBYTES));
     delete[] digest;
     return cmpHashes;
 }
